@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiTV</title>
+<meta name="description" content="Descargá tu app de DigiTV y activá tu usuario gratis.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--bg:#020817;
+--card:#071120;
+--card2:#0d1729;
+--primary:#72d8ff;
+--secondary:#6f7cff;
+--text:#f3f9ff;
+--muted:#98abc3;
+--border:rgba(114,216,255,.15);
+--green:#25d366;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#020817;
+color:var(--text);
+overflow-x:hidden;
+}
+
+/* ── Fondo ── */
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:linear-gradient(rgba(2,8,23,.8),rgba(2,8,23,.96)),url('img/fondo2.png') center/cover no-repeat;
+z-index:-2;
+}
+
+body::after{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(ellipse 80% 50% at top left, rgba(114,216,255,.12), transparent),
+radial-gradient(ellipse 60% 50% at bottom right, rgba(111,124,255,.12), transparent);
+z-index:-1;
+}
+
+/* ── NAV ── */
+.nav{
+position:sticky;
+top:0;
+height:82px;
+padding:0 28px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+backdrop-filter:blur(20px) saturate(160%);
+background:rgba(2,8,23,.72);
+border-bottom:1px solid var(--border);
+z-index:50;
+}
+
+.logoImg{height:90px;object-fit:contain}
+
+.nav-pills{display:flex;gap:10px}
+
+.nav-pill{
+text-decoration:none;
+font-family:'Orbitron',sans-serif;
+font-size:11px;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:var(--muted);
+padding:12px 18px;
+border-radius:999px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(114,216,255,.12);
+transition:.3s;
+}
+.nav-pill:hover,.nav-pill.active{
+color:#fff;
+background:rgba(114,216,255,.12);
+box-shadow:0 0 24px rgba(114,216,255,.2);
+}
+
+/* ── HERO ── */
+.hero{
+position:relative;
+min-height:620px;
+height:88vh;
+overflow:hidden;
+display:flex;
+align-items:flex-end;
+}
+.hero img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center 30%;
+}
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(2,8,23,.15) 0%,rgba(2,8,23,.5) 55%,rgba(2,8,23,1) 100%);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+padding:0 50px 55px;
+max-width:900px;
+animation:fadeUp .9s ease both;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:10px 18px;
+border-radius:999px;
+background:rgba(2,8,23,.72);
+border:1px solid rgba(114,216,255,.28);
+font-family:'Orbitron',sans-serif;
+font-size:11px;
+letter-spacing:.14em;
+text-transform:uppercase;
+margin-bottom:20px;
+}
+.dot{
+width:9px;height:9px;border-radius:50%;
+background:var(--primary);
+box-shadow:0 0 15px var(--primary);
+animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 10px var(--primary)}50%{opacity:.7;box-shadow:0 0 22px var(--primary)}}
+
+.hero h1{
+font-family:'Orbitron',sans-serif;
+font-size:clamp(2.4rem,6vw,5rem);
+line-height:.92;
+text-transform:uppercase;
+margin-bottom:20px;
+}
+.hero h1 .grad{
+background:linear-gradient(90deg,var(--primary) 0%,#d0f4ff 50%,var(--secondary) 100%);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.hero p{
+font-size:1.05rem;
+line-height:1.8;
+color:var(--muted);
+max-width:560px;
+}
+
+/* ── MAIN ── */
+.main{
+padding:60px 36px 110px;
+max-width:1520px;
+margin:auto;
+}
+
+/* ── SECTION TITLE ── */
+.section-header{
+display:flex;
+align-items:baseline;
+gap:16px;
+margin-bottom:28px;
+}
+.section-header h2{
+font-family:'Orbitron',sans-serif;
+font-size:22px;
+text-transform:uppercase;
+letter-spacing:.06em;
+}
+.section-header span{
+font-size:13px;
+color:var(--muted);
+}
+
+/* ── APP CARDS ── */
+.apps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.app-card{
+text-decoration:none;
+color:#fff;
+background:linear-gradient(180deg,rgba(9,22,42,.97),rgba(4,10,22,.97));
+border:1px solid rgba(114,216,255,.12);
+border-radius:24px;
+padding:28px 20px 22px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:16px;
+transition:transform .35s,box-shadow .35s,border-color .35s;
+min-height:320px;
+position:relative;
+overflow:hidden;
+}
+.app-card::before{
+content:'';
+position:absolute;
+top:0;left:0;right:0;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(114,216,255,.5),transparent);
+opacity:0;
+transition:.4s;
+}
+.app-card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 50px rgba(114,216,255,.12),0 0 0 1px rgba(114,216,255,.2);
+border-color:rgba(114,216,255,.3);
+}
+.app-card:hover::before{opacity:1}
+
+.app-ico-wrap{
+width:96px;height:96px;
+border-radius:22px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.09);
+display:flex;align-items:center;justify-content:center;
+padding:10px;
+}
+.app-ico{
+width:100%;height:100%;
+object-fit:contain;
+}
+
+.app-num{
+font-family:'Orbitron',sans-serif;
+font-size:10px;
+letter-spacing:.18em;
+color:var(--primary);
+text-transform:uppercase;
+}
+.app-name{
+font-family:'Orbitron',sans-serif;
+font-size:16px;
+font-weight:700;
+text-align:center;
+}
+.app-sub{
+font-size:13px;
+line-height:1.7;
+text-align:center;
+color:var(--muted);
+flex:1;
+}
+.download-btn{
+width:100%;
+text-align:center;
+padding:14px;
+border-radius:14px;
+background:linear-gradient(90deg,var(--primary),#4ab4ff);
+color:#02101d;
+font-family:'Orbitron',sans-serif;
+font-size:11px;
+font-weight:800;
+letter-spacing:.14em;
+text-transform:uppercase;
+transition:filter .25s;
+}
+.app-card:hover .download-btn{filter:brightness(1.1)}
+
+/* ── CATALOG LINK ── */
+.catalog-link{
+margin-top:22px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 28px;
+text-decoration:none;
+height:62px;
+border-radius:18px;
+background:rgba(114,216,255,.05);
+border:1px solid rgba(114,216,255,.14);
+color:var(--text);
+font-family:'Orbitron',sans-serif;
+font-size:13px;
+letter-spacing:.08em;
+transition:.3s;
+}
+.catalog-link:hover{
+background:rgba(114,216,255,.1);
+box-shadow:0 0 30px rgba(114,216,255,.1);
+color:#fff;
+}
+.catalog-link .arrow{
+font-size:20px;
+color:var(--primary);
+transition:transform .3s;
+}
+.catalog-link:hover .arrow{transform:translateX(6px)}
+
+/* ── STATS ── */
+.stats{
+margin-top:44px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-radius:24px;
+overflow:hidden;
+border:1px solid rgba(114,216,255,.14);
+}
+.stat{
+padding:32px;
+background:rgba(7,17,32,.96);
+text-align:center;
+position:relative;
+}
+.stat+.stat{border-left:1px solid rgba(114,216,255,.1)}
+.stat::before{
+content:'';
+position:absolute;
+top:0;left:50%;transform:translateX(-50%);
+width:60%;height:1px;
+background:linear-gradient(90deg,transparent,rgba(114,216,255,.3),transparent);
+}
+.stat h3{
+font-family:'Orbitron',sans-serif;
+font-size:42px;
+margin-bottom:8px;
+background:linear-gradient(135deg,var(--primary),#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.stat p{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+
+/* ── HOW TO ── */
+.how{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.step{
+background:rgba(7,17,32,.96);
+border:1px solid rgba(114,216,255,.12);
+border-radius:24px;
+padding:30px;
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+.step:hover{
+border-color:rgba(114,216,255,.25);
+box-shadow:0 0 30px rgba(114,216,255,.07);
+}
+.step::after{
+content:'';
+position:absolute;
+bottom:0;right:0;
+width:80px;height:80px;
+border-radius:50%;
+background:radial-gradient(rgba(114,216,255,.08),transparent 70%);
+}
+
+.step-number{
+width:46px;height:46px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:#02101d;
+font-family:'Orbitron',sans-serif;
+font-weight:800;
+font-size:18px;
+display:flex;align-items:center;justify-content:center;
+margin-bottom:20px;
+box-shadow:0 4px 20px rgba(114,216,255,.3);
+}
+.step h3{font-family:'Orbitron',sans-serif;margin-bottom:12px;font-size:15px}
+.step p{color:var(--muted);line-height:1.7;font-size:14px}
+
+/* ── SMART TV BOX ── */
+.tv-box{
+margin-top:55px;
+padding:36px;
+border-radius:28px;
+background:rgba(7,17,32,.96);
+border:1px solid rgba(114,216,255,.12);
+}
+.tv-box h2{
+font-family:'Orbitron',sans-serif;
+font-size:26px;
+margin-bottom:30px;
+text-transform:uppercase;
+}
+.tv-steps-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+.tv-step{
+display:flex;
+gap:16px;
+padding:18px;
+border-radius:16px;
+background:rgba(114,216,255,.04);
+border:1px solid rgba(114,216,255,.08);
+transition:.25s;
+}
+.tv-step:hover{background:rgba(114,216,255,.07)}
+.tv-icon{
+width:42px;height:42px;
+border-radius:14px;
+background:rgba(114,216,255,.12);
+display:flex;align-items:center;justify-content:center;
+font-family:'Orbitron',sans-serif;
+color:var(--primary);
+font-weight:800;
+font-size:15px;
+flex-shrink:0;
+}
+.tv-step p{line-height:1.75;color:var(--muted);font-size:14px;padding-top:6px}
+.tv-logo{height:28px;width:auto;vertical-align:middle;display:inline-block}
+.code{
+padding:3px 10px;
+border-radius:8px;
+background:rgba(114,216,255,.14);
+color:var(--primary);
+font-family:monospace;
+font-size:15px;
+letter-spacing:.05em;
+}
+
+/* ── CTA ── */
+.cta{
+margin-top:55px;
+padding:40px 44px;
+border-radius:28px;
+background:linear-gradient(145deg,rgba(8,20,38,.98),rgba(4,10,22,.98));
+border:1px solid rgba(114,216,255,.14);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:24px;
+position:relative;
+overflow:hidden;
+}
+.cta::before{
+content:'';
+position:absolute;
+top:-50%;right:-10%;
+width:400px;height:400px;
+border-radius:50%;
+background:radial-gradient(rgba(114,216,255,.07),transparent 70%);
+pointer-events:none;
+}
+.cta h2{
+font-family:'Orbitron',sans-serif;
+font-size:clamp(2rem,4.5vw,3.2rem);
+line-height:1;
+text-transform:uppercase;
+}
+.cta h2 span{color:var(--primary)}
+.cta p{margin-top:14px;color:var(--muted);line-height:1.8;max-width:500px}
+
+.btn-wa{
+text-decoration:none;
+padding:20px 36px;
+border-radius:16px;
+background:#25d366;
+color:#fff;
+font-family:'Orbitron',sans-serif;
+font-size:13px;
+letter-spacing:.12em;
+text-transform:uppercase;
+font-weight:700;
+white-space:nowrap;
+flex-shrink:0;
+box-shadow:0 0 28px rgba(37,211,102,.3);
+transition:box-shadow .3s,transform .25s;
+}
+.btn-wa:hover{
+box-shadow:0 0 42px rgba(37,211,102,.45);
+transform:translateY(-3px);
+}
+
+/* ── FAB ── */
+.fab{
+position:fixed;
+right:22px;
+bottom:22px;
+z-index:100;
+text-decoration:none;
+padding:16px 24px;
+border-radius:999px;
+background:#25d366;
+color:#fff;
+font-family:'Orbitron',sans-serif;
+font-size:12px;
+letter-spacing:.1em;
+text-transform:uppercase;
+font-weight:700;
+box-shadow:0 0 32px rgba(37,211,102,.35);
+transition:transform .25s,box-shadow .25s;
+}
+.fab:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 48px rgba(37,211,102,.5)}
+
+
+.download-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+
+.btn-blue{
+background:linear-gradient(90deg,#1d4ed8,#60a5fa)!important;
+color:#fff!important;
+}
+
+.btn-green{
+background:linear-gradient(90deg,#15803d,#4ade80)!important;
+color:#fff!important;
+}
+
+.btn-purple{
+background:linear-gradient(90deg,#6d28d9,#c084fc)!important;
+color:#fff!important;
+}
+
+.btn-black{
+background:linear-gradient(90deg,#000000,#434343)!important;
+color:#fff!important;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1200px){
+.apps{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+.apps,.how{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr}
+.stat+.stat{border-left:none;border-top:1px solid rgba(114,216,255,.1)}
+.cta{flex-direction:column;align-items:flex-start;padding:30px}
+.hero-content{padding:0 24px 32px}
+.main{padding:40px 20px 110px}
+.logoImg{height:72px}
+.tv-steps-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <img class="logoImg" src="img/logo.png" alt="DigiTV">
+  <div class="nav-pills">
+    <a class="nav-pill active" href="index.html">Home</a>
+    <a class="nav-pill" href="catalogo.html">Catálogo</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <img src="img/fondo2.png" alt="Space">
+  <div class="hero-content">
+    <div class="badge"><div class="dot"></div>Disponible Ahora</div>
+    <h1>Descargá<br><span class="grad">La App</span><br>En Segundos</h1>
+    <p>Elegí tu versión favorita, instalala y solicitá tu usuario gratis por WhatsApp.</p>
+  </div>
+</section>
+
+<main class="main">
+
+  <div class="section-header">
+    <h2>Elegí Tu Aplicación</h2>
+    <span>4 opciones disponibles</span>
+  </div>
+
+  
+<div class="apps">
+
+    <a class="app-card" href="https://github.com/sudamericaplay/digital_tv_normal/releases/download/v4.0/LUMIXTV_PLUS.apk">
+      <div class="app-ico-wrap"><img class="app-ico" src="img/down.png" alt="App 1"></div>
+      <div class="app-num">Opción</div>
+      <div class="app-name">LM TV</div>
+      <div class="app-sub">Conexiones normales (+10MB). Ideal para la mayoría de los dispositivos.</div>
+      <div class="download-btn btn-blue">📺 ⬇ Descargar APK</div>
+    </a>
+
+    <a class="app-card" href="https://app.zombix2020.workers.dev/app">
+      <div class="app-ico-wrap"><img class="app-ico" src="img/down.png" alt="App 2"></div>
+      <div class="app-num">Opción</div>
+      <div class="app-name">NB TV</div>
+      <div class="app-sub">Conexiones Normales.</div>
+      <div class="download-btn btn-green">📺 ⬇ Descargar APK</div>
+    </a>
+
+    <a class="app-card" href="http://www.zyrontv.xyz/apps/Zyron4k_1.18.apk">
+      <div class="app-ico-wrap"><img class="app-ico" src="img/down.png" alt="App 3"></div>
+      <div class="app-num">Opción</div>
+      <div class="app-name">ZYRON TV 4K</div>
+      <div class="app-sub">Recomendado para fibra óptica. Mejor experiencia en redes rápidas.</div>
+      <div class="download-btn btn-purple">📺 ⬇ Descargar APK</div>
+    </a>
+
+    <a class="app-card" href="https://github.com/mac-donal/apk/releases/download/tvplus2/tvplus2-2026.apk">
+      <div class="app-ico-wrap"><img class="app-ico" src="img/down.png" alt="App 4"></div>
+      <div class="app-num">Opción</div>
+      <div class="app-name">TV P2</div>
+      <div class="app-sub">Requiere solo 3MB.</div>
+      <div class="download-btn btn-black">📺 ⬇ Descargar APK</div>
+    </a>
+
+  </div>
+
+  <a class="catalog-link"
+ href="catalogo.html">
+    <span>Ver Catálogo De Canales — 591 canales disponibles</span>
+    <span class="arrow">→</span>
+  </a>
+
+  <div class="stats">
+    <div class="stat"><h3>4</h3><p>Aplicaciones</p></div>
+    <div class="stat"><h3>HD</h3><p>Calidad</p></div>
+    <div class="stat"><h3>24/7</h3><p>Soporte</p></div>
+  </div>
+
+  <div class="how">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Elegí Tu App</h3>
+      <p>Seleccioná la aplicación que mejor funcione en tu dispositivo según tu tipo de conexión.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Instalá El APK</h3>
+      <p>Descargá e instalá el archivo APK en tu celular, TV Box o Smart TV.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Pedí Tu Usuario</h3>
+      <p>Contactanos por WhatsApp y activamos tu acceso gratis en minutos.</p>
+    </div>
+  </div>
+
+  <div class="tv-box">
+    <h2>Instalación En Smart TV</h2>
+    <div class="tv-steps-grid">
+      <div class="tv-step">
+        <div class="tv-icon">1</div>
+        <p>Ingresá al PLAY STORE <strong><img class="tv-logo" src="https://ams3.digitaloceanspaces.com/graffica/2022/07/714262829697e9749a4aa86b3c1f5538-976x1024.png" alt="Downloader"> y descarga la APP DOWNLOADER</strong> <strong><img class="tv-logo" src="https://play-lh.googleusercontent.com/8GH0RvjdKu8UAx4rBQ5SwSNQkLwz7cZxH6K5yxxZVczAzLEteOJk7G2vHos6j7nNdKA" alt="Google Play"></strong>.</p>
+      </div>
+      <div class="tv-step">
+        <div class="tv-icon">2</div>
+        <p>Entrá a la búsqueda e ingresá el código <span class="code">9810103</span>.</p>
+      </div>
+      <div class="tv-step">
+        <div class="tv-icon">3</div>
+        <p>Esperá unos segundos y descargá la aplicación automáticamente.</p>
+      </div>
+      <div class="tv-step">
+        <div class="tv-icon">4</div>
+        <p>Instalá la aplicación y aceptá los permisos necesarios para continuar.</p>
+      </div>
+      <div class="tv-step">
+        <div class="tv-icon">5</div>
+        <p>Solicitá tu usuario y contraseña por WhatsApp y comenzá tu prueba gratis.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h2>Activá Tu<br><span>Cuenta Ahora</span></h2>
+      <p>Escribinos directamente por WhatsApp y recibí acceso en minutos. Sin tarjeta de crédito, sin compromisos.</p>
+    </div>
+    <a class="btn-wa" href="https://wa.me/5492645114277?text=Hola%20quiero%20información" target="_blank">
+      WhatsApp
+    </a>
+  </div>
+
+</main>
+
+<a class="fab" href="https://wa.me/5492645114277?text=Hola%20quiero%20información" target="_blank">
+  WhatsApp
+</a>
+
+</body>
+</html>
